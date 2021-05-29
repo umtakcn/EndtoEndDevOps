@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: elveslibrary
+spec:
+  replicas: 4
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: elveslibraryapp
+  template:
+    metadata:
+      labels:
+        app: elveslibraryapp
+    spec:
+      containers:
+      - name: elveslibraryapp
+        image: nexus-ip:8083/umtakcn/elveslibraryapp-database:0.1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: nexus
+  strategy:
+    blueGreen:
+      activeService: elveslibraryapp-active-service
+      autoPromotionEnabled: false
+      autoPromotionSeconds: 300
+      maxUnavailable: 2
+      previewService: elveslibraryapp-preview-service

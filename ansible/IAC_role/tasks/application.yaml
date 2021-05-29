@@ -1,0 +1,16 @@
+- name: Deploy application
+  hosts: Master_Server
+  tasks:
+    - name: Place /opt/deployment.yaml
+      template:
+        src: /opt/IAC_role/templates/deployment.yaml
+        dest: /opt/deployment.yaml
+    - name: Place /opt/service.yaml
+      template:
+        src: /opt/IAC_role/templates/service.yaml
+        dest: /opt/service.yaml
+    - name: Create deployment and service.
+      shell: "{{ item }}"
+      with_items:
+        - kubectl apply -f /opt/deployment.yaml
+        - kubectl apply -f /opt/service.yaml

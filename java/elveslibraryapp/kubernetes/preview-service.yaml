@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: elveslibraryapp-preview-service
+spec:
+  type: NodePort
+  selector:
+    app: elveslibraryapp
+  ports:
+    - port: 80
+      targetPort: 9080
+      nodePort: 32000

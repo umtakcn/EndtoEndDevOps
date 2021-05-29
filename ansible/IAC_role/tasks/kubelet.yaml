@@ -1,0 +1,17 @@
+- name: Install Kubelet.
+  hosts: Kubernetes_Servers
+  tasks:
+    - name: Place kubernetes.repo.j2
+      template:
+        src: /opt/IAC_role/templates/kubernetes.repo
+        dest: /etc/yum.repos.d/kubernetes.repo
+    - name: Install Kubelet.
+      command: "{{ item }}"
+      with_items:
+          - dnf upgrade -y --nobest
+          - dnf install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+    - name: Start Kubelet service.
+      service:
+        name: kubelet
+        state: started
+        enabled: yes

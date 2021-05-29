@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elveslibraryapp-deployment
+  labels:
+    app: elveslibrary
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: elveslibrary
+  template:
+    metadata:
+      labels:
+        app: elveslibrary
+    spec:
+      containers:
+      - name: elveslibrary
+        image: umtakcn/elveslibraryapp:0.1
+        ports:
+        - containerPort: 80

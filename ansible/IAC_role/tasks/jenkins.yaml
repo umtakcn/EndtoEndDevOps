@@ -1,0 +1,51 @@
+- name: Install Jenkins.
+  hosts: Jenkins_Server
+  tasks:
+    - name: Install OpenJDK 11 and Git.
+      dnf:
+        name: 
+          - java-11-openjdk-devel
+          - git
+    - name: Download latest Maven package.
+      get_url:
+       url: "https://ftp.itu.edu.tr/Mirror/Apache/maven/maven-3/3.8.1/binaries/apache-maven-3.8.1-bin.tar.gz"
+       dest: /opt/apache-maven-3.8.1-bin.tar.gz
+    - name: Unarchive Maven package.
+      unarchive:
+       src: /opt/apache-maven-3.8.1-bin.tar.gz
+       dest: /opt
+       remote_src: yes
+    - name: Create a shortcut for Maven.
+      shell: ln -s /opt/apache-maven-3.8.1 /opt/maven
+    - name: Place /etc/profile.d/maven.sh
+      template:
+        src: /opt/IAC_role/templates/maven.sh
+        dest: /etc/profile.d/maven.sh
+    - name: Make maven.sh executeable and load the environment variables.
+      shell: "{{ item }}"
+      with_items:
+        - chmod +x /etc/profile.d/maven.sh
+        - source /etc/profile.d/maven.sh
+    - name: Install wget.
+      dnf:
+        name: wget
+    - name: Add Jenkins repo.
+      shell: "{{ item }}"
+      with_items:
+        - wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat/jenkins.repo
+        - rpm --import https://pkg.jenkins.io/redhat/jenkins.io.key
+    - name: Install Jenkins.
+      dnf:
+        name: jenkins
+    - name: Force systemd to reread configs.
+      systemd: daemon_reload=yes
+    - name: Start Jenkins service.
+      service:
+        name: jenkins
+        state: started
+        enabled: yes
+    - name: Give permissions to docker.sock
+      file:
+        path: /var/run/docker.sock
+        state: touch
+        mode: 0777

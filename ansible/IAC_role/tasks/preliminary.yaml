@@ -1,0 +1,19 @@
+- name: Preliminary.
+  hosts: all
+  tasks:
+    - name: Disable SELinux.
+      command: "{{ item }}"
+      with_items:
+          - "setenforce 0"
+          - "sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux"
+    - name: Enable transparent masquerading.
+      command: modprobe br_netfilter
+    - name: Place /etc/sysctl.d/k8s.conf.
+      template:
+        src: /opt/IAC_role/templates/k8s.conf
+        dest: /etc/sysctl.d/k8s.conf
+    - name: Run necessary commands.
+      command: "{{ item }}"
+      with_items:
+          - sysctl --system
+          - swapoff -a

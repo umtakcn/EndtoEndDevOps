@@ -1,0 +1,63 @@
+pipeline {
+   agent any
+    environment {
+        JAVA_HOME = "/usr/lib/jvm/java-11-openjdk-11.0.11.0.9-0.el8_3.x86_64"
+        MAVEN_HOME = "/opt/maven"
+        PATH = "$PATH:$MAVEN_HOME/bin"
+    }
+    stages {
+        stage('SCM') {
+            steps {
+              git credentialsId: 'github', branch: 'main', url: 'https://github.com/umtakcn/elveslibraryapp.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                dir('/var/lib/jenkins/workspace/ElvesLibraryApp/app') {
+                    sh 'mvn clean package'
+                    sh 'mv /var/lib/jenkins/workspace/ElvesLibraryApp/app/target/elveslibraryapp.war /var/lib/jenkins/workspace/ElvesLibraryApp/'
+                }
+            }
+        }
+        stage('Dockerize') {
+            steps {
+                script {
+                    dir('/var/lib/jenkins/workspace/ElvesLibraryApp') {
+                       newImage = docker.build("umtakcn/elveslibraryapp")
+                       docker.withRegistry("https://registry.hub.docker.com", 'dockerhub'){
+                           newImage.push("0.${BUILD_NUMBER}")
+                        }  
+                    }
+                }
+            }
+        }
+        stage('Version') {
+            steps {
+                dir('/var/lib/jenkins/workspace/ElvesLibraryApp/kubernetes') {
+                    script{
+                        def deployment = readYaml file: "deployment.yaml"
+                        deployment.spec.template.spec.containers[0].image = "umtakcn/elveslibraryapp:0.${BUILD_NUMBER}"
+                        sh "rm -rf deployment.yaml"
+                        writeYaml file: "deployment.yaml", data: deployment
+                    }
+                }
+            }
+        }
+        stage('Push') {
+            steps {
+                dir('/var/lib/jenkins/workspace/ElvesLibraryApp/kubernetes') {
+                    sh 'git commit deployment.yaml -m update'
+                    withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+                       sh 'git config --local credential.helper "!f() { echo username=\\$GIT_USERNAME; echo password=\\$GIT_PASSWORD; }; f"'
+                       sh 'git push origin main'
+                    }
+                }
+            }
+        }
+    }
+    post { 
+        always { 
+            cleanWs()
+        }
+    }
+}

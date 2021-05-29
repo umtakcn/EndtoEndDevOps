@@ -1,0 +1,15 @@
+- name: Initiate Master.
+  hosts: Master
+  tasks:
+    - name: Initiate cluster.
+      command: "{{ item }}"
+      with_items:
+          - "kubeadm config images pull"
+          - "kubeadm init --apiserver-advertise-address={{ ip_master }} --pod-network-cidr=192.168.0.0/16"
+    - name: Set necessary configurations.
+      shell: "{{ item }}"
+      with_items:
+          - "mkdir -p $HOME/.kube"
+          - "cp -i /etc/kubernetes/admin.conf $HOME/.kube/config"
+          - "chown $(id -u):$(id -g) $HOME/.kube/config"
+          - "kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml"

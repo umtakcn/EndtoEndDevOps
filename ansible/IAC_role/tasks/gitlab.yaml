@@ -1,0 +1,28 @@
+- name: Install Gitlab.
+  hosts: Gitlab_Server
+  tasks:
+    - name: Install necessary packages.
+      dnf:
+        name:
+          - curl
+          - policycoreutils
+          - openssh-server
+          - openssh-clients
+          - bind-utils
+        state: latest
+    - name: Start sshd.
+      service:
+        name: sshd
+        state: started
+        enabled: yes
+    - name: Download Gitlab script file.
+      get_url:
+       url: "https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rpm.sh"
+       dest: /opt/gitlab-script.rpm.sh
+    - name:
+      shell: dig +short myip.opendns.com @resolver1.opendns.com
+      register: ip
+    - name: Execute Gitlab script.
+      shell: sh /opt/gitlab-script.rpm.sh
+    - name: Install Gitlab.
+      shell: EXTERNAL_URL="http://{{ ip.stdout_lines[0] }}" dnf install -y gitlab-ce
