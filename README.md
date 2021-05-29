@@ -94,6 +94,11 @@ You can access Jenkins with http://jenkins-external-ip:8080 . After you login Je
      - Gitlab Username with password
      - Nexus Username with password
      - Sonarqube secret text
-3. Go to Manage Jenkins --> Configure System --> Sonarqube servers . Configure like this;
- ![resim](https://user-images.githubusercontent.com/60771816/120084523-967ad280-c0d9-11eb-8c2d-bacee82be74d.png)
+3. Go to Manage Jenkins --> Configure System --> Sonarqube servers --> Add SonarQube . Configure like this;
+ ![resim](https://user-images.githubusercontent.com/60771816/120084807-f07c9780-c0db-11eb-8971-d6cfb8b9d899.png)
+
+ 
+4. Go to Manage Jenkins --> Global Tool Configration --> Sonarqube Scanner --> Add Sonarqube Scanner . Configure like this;
+![resim](https://user-images.githubusercontent.com/60771816/120084793-d17e0580-c0db-11eb-8248-dc6232f11169.png)
+
  
