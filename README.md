@@ -4,9 +4,9 @@
 ==============
 
 - [End to End DevOps](#end-to-end-devops)
-  * [What is it?](#what-is-it-?)
-  * [What tools were used?](#what-tools-were-used-?)
-  * [What is the lifecycle of this automation process?](#what-is-the-lifecycle-of-this-automation-process-)
+  * [What is it?](#what-is-it)
+  * [What tools were used?](#what-tools-were-used)
+  * [What is the lifecycle of this automation process?](#what-is-the-lifecycle-of-this-automation-process)
     + [1- Creating Infrastructure - Terraform](#1--creating-infrastructure---terraform)
     + [2- Creating Environment - Ansible](#2--creating-environment---ansible)
     + [3- Source Control Management - Gitlab](#3--source-control-management---gitlab)
@@ -15,7 +15,7 @@
     + [6- Continuous Integration - Jenkins](#6--continuous-integration---jenkins)
     + [7- Continuous Deployment - ArgoCD](#7--continuous-deployment---argocd)
     + [8- Application - ElvesLibraryApp](#8--application---elveslibraryapp)
-  * [How does it look like?](#how-does-it-look-like-?)
+  * [How does it look like?](#how-does-it-look-like)
 
 ### What is it?
 End-to-End DevOps is a project that creates the automation processes from committing a code to a version control system to deploying it to the production environment. It includes creating infrastructure, environment and CI/CD pipelines.
