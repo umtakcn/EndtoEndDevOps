@@ -1,4 +1,5 @@
 ## End to End DevOps
+
 Table of Contents
 =================
 
@@ -6,6 +7,7 @@ Table of Contents
   * [What tools were used?](### What tools were used?)
   * [What is the lifecycle of this automation process?](### What is the lifecycle of this automation process?)
   * [Creating Infrastructure - Terraform](### Creating Infrastructure - Terraform)
+
 ### What is it?
 End-to-End DevOps is a project that creates the automation processes from committing a code to a version control system to deploying it to the production environment. It includes creating infrastructure, environment and CI/CD pipelines.
 ### What tools were used?
