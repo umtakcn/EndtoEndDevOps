@@ -1,7 +1,6 @@
 ## End to End DevOps
 ### What is it?
 End-to-End DevOps is a project that creates the automation processes from committing a code to a version control system to deploying it to the production environment. It includes creating infrastructure, environment and CI/CD pipelines.
-
 ### What tools were used?
 - Application: Java Spring Boot Framework
 - Source Control Management: Gitlab
@@ -9,14 +8,14 @@ End-to-End DevOps is a project that creates the automation processes from commit
 - Continuous Integration: Jenkins
 - Continuous Deployment: ArgoCD
 - Repository: Nexus
-- Test: Sonarqube
+- Test: SonarQube
 - Configuration Management: Ansible
 - Infrastructre Provisioning: Terraform
 - Container Runtime: Docker
 - Container Orchestration: Kubernetes
 - Compute: Google Cloud Provider
 - Database: MySQL
-- Operating System: CentOS 8
+- Operating Systems: CentOS 8
 ### 1- Creating Infrastructure - Terraform
 First of all, we need to create infrastructure which includes servers, network and firewall rules. We will use Google Cloud Provider for this. You can get 300 $ free balance for 3 months. All you need is a new Google account. This is more than enough for this project. 
 We will use Terraform to create servers, network and firewall rules. Since we need to create many servers and configure many things, Terraform script will simplify all these things. Let's start.
@@ -63,7 +62,7 @@ Ssh into ansible-controller instance and upload IAC_role folder to the server. I
 ansible-playbook main.yaml -i inventory.txt
 ```
 It will take a while. Ansible will create baremetal 1 Master 2 Slave Kubernetes cluster, Jenkins, Gitlab, Nexus and Sonarqube. All configurations will be done and ready to go. 
-### 3- Gitlab
+### 3- Source Control Management - Gitlab
 You can access Gitlab with http://gitlab-external-ip . After that, you should create a project that contains the application source code. To do this in your local computer enter folder which contains application and write these one by one in command window;
 ```shell
 git init
@@ -77,12 +76,12 @@ You should be able to see your application code on Gitlab project that you creat
 ![resim](https://user-images.githubusercontent.com/60771816/120084540-c75b0780-c0d9-11eb-8442-4cf7b90658de.png)
 
 Also we need to create a webhook to integrate Gitlab with Jenkins. Go to project that you created --> Settings --> Webhooks . Write URL area http://jenkins-external-ip:8080/generic-webhook-trigger/invoke . Write Secret token elveslibraryapp . Tick Push Events and add webhook.
-### 4- Nexus
+### 4- Repository - Nexus
 You can access Nexus with http://nexus-external-ip:8081 . After you login Nexus, click on settings symbol --> Repositories --> Create repository --> docker (hosted) . Configure like this;
 
 ![resim](https://user-images.githubusercontent.com/60771816/120084552-df328b80-c0d9-11eb-95e4-ecf72c56a29e.png)
 
-### 5- Sonarqube
+### 5- Test - Sonarqube
 You can access Sonarqube with http://sonarqube-external-ip:9000 . After you login Sonarqube, click on A, right top corner --> My Account --> Security --> Generate Tokens . Save this generated token. We will use it for Jenkins. Then, go to Administration --> Configuration --> Webhooks --> Create . Write URL area http://jenkins-external-ip:8080/sonarqube-webhook/ . 
 ### 6- Continuous Integration - Jenkins
 You can access Jenkins with http://jenkins-external-ip:8080 . After you login Jenkins interface, install suggested plugins. We need to configure a couple of things.
@@ -109,7 +108,5 @@ You can access Jenkins with http://jenkins-external-ip:8080 . After you login Je
 ![resim](https://user-images.githubusercontent.com/60771816/120084877-81537300-c0dc-11eb-9080-76a830220f1e.png) ![resim](https://user-images.githubusercontent.com/60771816/120084904-cbd4ef80-c0dc-11eb-9e27-ed8bf97416ed.png) ![resim](https://user-images.githubusercontent.com/60771816/120084899-bcee3d00-c0dc-11eb-93a3-a6026040470c.png)
 
 6. Copy the script in repository named jenkinsfile and paste it to pipeline section. Don't forget to set environments in the script. Our Continuous Integration pipeline is ready to go.
-### 7- Continuous Deployment ArgoCD
+### 7- Continuous Deployment - ArgoCD
 You can access with https://slave1-external-ip:nodeport . 
-
-
