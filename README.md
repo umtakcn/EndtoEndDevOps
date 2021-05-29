@@ -58,7 +58,7 @@ terraform apply
 ```
 Now check on Gcp. Instances, network and firewall rules should be created. 
 ### 2- Creating Environment - Ansible
-Ssh into ansible-control instance and upload IAC_role folder to the server. In IAC_role folder, execute this command;
+Ssh into ansible-controller instance and upload IAC_role folder to the server. In IAC_role folder, execute this command;
 ```shell
 ansible-playbook main.yaml -i inventory.txt
 ```
@@ -73,5 +73,16 @@ git commit -m "Initial commit"
 git push -u origin master
 ```
 You should be able to see your application code on Gitlab project that you created.
-### 4- Jenkins
-
+### 4- Nexus
+### 5- Sonarqube
+### 6- Jenkins
+You can access Jenkins with http://jenkins-external-ip:8080 . After you login Jenkins interface, install recommended plugins. We need to configure a couple of things.
+1. We need to install some plugins. Go to Manage Jenkins --> Manage Plugins --> Available . Install these plugins;
+     - Docker Pipeline
+     - Pipeline Utility Steps
+     - Sonarqube Scanner
+     - Generic Webhook Trigger
+2. We need to set credentials. Go to Manage Jenkins --> Manage Credentials --> Jenkins --> Global Credentials --> Add Credentials .
+     - Gitlab Username with password
+     - Nexus Username with password
+	 - Sonarqube secret text
