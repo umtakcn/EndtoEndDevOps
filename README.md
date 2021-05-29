@@ -1,4 +1,11 @@
 ## End to End DevOps
+Table of Contents
+=================
+
+  * [What is it?](#What is it?)
+  * [What tools were used?](#What tools were used?)
+  * [What is the lifecycle of this automation process?](#What is the lifecycle of this automation process?)
+  * [Creating Infrastructure - Terraform](#Creating Infrastructure - Terraform)
 ### What is it?
 End-to-End DevOps is a project that creates the automation processes from committing a code to a version control system to deploying it to the production environment. It includes creating infrastructure, environment and CI/CD pipelines.
 ### What tools were used?
@@ -16,6 +23,8 @@ End-to-End DevOps is a project that creates the automation processes from commit
 - Compute: Google Cloud Provider
 - Database: MySQL
 - Operating Systems: CentOS 8
+### What is the lifecycle of this automation process?
+
 ### 1- Creating Infrastructure - Terraform
 First of all, we need to create infrastructure which includes servers, network and firewall rules. We will use Google Cloud Provider for this. You can get 300 $ free balance for 3 months. All you need is a new Google account. This is more than enough for this project. 
 We will use Terraform to create servers, network and firewall rules. Since we need to create many servers and configure many things, Terraform script will simplify all these things. Let's start.
@@ -110,3 +119,6 @@ You can access Jenkins with http://jenkins-external-ip:8080 . After you login Je
 6. Copy the script in repository named jenkinsfile and paste it to pipeline section. Don't forget to set environments in the script. Our Continuous Integration pipeline is ready to go.
 ### 7- Continuous Deployment - ArgoCD
 You can access with https://slave1-external-ip:nodeport . 
+### 8- Application - ElvesLibraryApp
+
+### 9- How does it look like?
