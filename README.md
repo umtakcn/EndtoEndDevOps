@@ -84,7 +84,7 @@ You can access Nexus with http://nexus-external-ip:8081 . After you login Nexus,
 
 ### 5- Sonarqube
 You can access Sonarqube with http://sonarqube-external-ip:9000 . After you login Sonarqube, click on A, right top corner --> My Account --> Security --> Generate Tokens . Save this generated token. We will use it for Jenkins. Then, go to Administration --> Configuration --> Webhooks --> Create . Write URL area http://jenkins-external-ip:8080/sonarqube-webhook/ . 
-### 6- Jenkins
+### 6- Continuous Integration - Jenkins
 You can access Jenkins with http://jenkins-external-ip:8080 . After you login Jenkins interface, install suggested plugins. We need to configure a couple of things.
 1. Go to Manage Jenkins --> Manage Plugins --> Available . Install these plugins;
      - Docker Pipeline
@@ -96,7 +96,7 @@ You can access Jenkins with http://jenkins-external-ip:8080 . After you login Je
      - Nexus Username with password
      - Sonarqube secret text
 3. Go to Manage Jenkins --> Configure System --> Sonarqube servers --> Add SonarQube . Configure like this;
-4. 
+
 ![resim](https://user-images.githubusercontent.com/60771816/120084807-f07c9780-c0db-11eb-8971-d6cfb8b9d899.png)
 
  
@@ -108,5 +108,8 @@ You can access Jenkins with http://jenkins-external-ip:8080 . After you login Je
  
 ![resim](https://user-images.githubusercontent.com/60771816/120084877-81537300-c0dc-11eb-9080-76a830220f1e.png) ![resim](https://user-images.githubusercontent.com/60771816/120084904-cbd4ef80-c0dc-11eb-9e27-ed8bf97416ed.png) ![resim](https://user-images.githubusercontent.com/60771816/120084899-bcee3d00-c0dc-11eb-93a3-a6026040470c.png)
 
-6. Copy the script in repository named jenkinsfile and paste it to pipeline section. Don't forget to set environments in the script.
+6. Copy the script in repository named jenkinsfile and paste it to pipeline section. Don't forget to set environments in the script. Our Continuous Integration pipeline is ready to go.
+### 7- Continuous Deployment ArgoCD
+You can access with https://slave1-external-ip:nodeport . 
+
 
