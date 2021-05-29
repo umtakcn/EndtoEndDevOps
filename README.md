@@ -32,10 +32,24 @@ End-to-End DevOps is a project that creates the automation processes from commit
 - Container Runtime: Docker
 - Container Orchestration: Kubernetes
 - Compute: Google Cloud Provider
+- Application Server: WebSphere Liberty
 - Database: MySQL
 - Operating Systems: CentOS 8
 ### What is the lifecycle of this automation process?
-
+- Change the source code of your application in your Ide locally.
+- Commit the change to the Gitlab.
+- Jenkins will be triggered by commit.
+- Jenkins Continuous Integration Pipeline will be started.
+- Source code will be cloned to Jenkins Server.
+- Source code will be built by Maven.
+- Source code will be tested by SonarQube.
+- Application will be containerized by Docker.
+- Image section in rollout.yaml will be replaced with new image version.
+- New rollout.yaml will be pushed to Gitlab.
+- ArgoCD will acknowledge new rollout.yaml in Gitlab project.
+- ArgoCD will start deployment to Kubernetes Cluster using Blue/Green method.
+- New application pods will run on Kubernetes while old application pods continue to run via different service.
+- Application will run on WebSphere Liberty in a pod and ready to serve clients.
 #### 1- Creating Infrastructure - Terraform
 First of all, we need to create infrastructure which includes servers, network and firewall rules. We will use Google Cloud Provider for this. You can get 300 $ free balance for 3 months. All you need is a new Google account. This is more than enough for this project. 
 We will use Terraform to create servers, network and firewall rules. Since we need to create many servers and configure many things, Terraform script will simplify all these things. Let's start.
