@@ -36,7 +36,7 @@ End-to-End DevOps is a project that creates the automation processes from commit
 - Database: MySQL
 - Operating Systems: CentOS 8
 ### What is the lifecycle of this automation process?
-- Change the source code of your application in your Ide locally.
+- Change the source code of your application in your IDE locally.
 - Commit the change to the Gitlab.
 - Jenkins will be triggered by commit.
 - Jenkins Continuous Integration Pipeline will be started.
