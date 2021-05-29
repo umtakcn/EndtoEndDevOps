@@ -2,6 +2,7 @@
 
 ### Table of Contents
 ==============
+
 - [What is it?](#what-is-it-)
 - [What tools were used?](#what-tools-were-used-)
 - [What is the lifecycle of this automation process?](#what-is-the-lifecycle-of-this-automation-process-)
