@@ -5,9 +5,9 @@ pipeline {
         MAVEN_HOME = "/opt/maven"
         PATH = "$PATH:$MAVEN_HOME/bin"
         SCANNER_HOME = tool 'SonarQubeScanner'
-        GIT_URL = "http://35.239.179.42/root/elveslibraryapp.git"
-        REPO_URL = "http://35.193.8.3:8083"
-        IMAGE = "35.193.8.3:8083/umtakcn/elveslibraryapp:0.${BUILD_NUMBER}"
+        GIT_URL = "http://gitlab-external-ip/root/elveslibraryapp.git"
+        REPO_URL = "http://nexus-exernal-ip:8083"
+        IMAGE = "nexus-external-ip:8083/umtakcn/elveslibraryapp:0.${BUILD_NUMBER}"
         
     }
     stages {
