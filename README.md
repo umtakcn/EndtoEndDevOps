@@ -104,4 +104,8 @@ You can access Jenkins with http://jenkins-external-ip:8080 . After you login Je
 
 ![resim](https://user-images.githubusercontent.com/60771816/120084793-d17e0580-c0db-11eb-8248-dc6232f11169.png)
 
+5. Go to New Item --> Pipeline . Tick Generic Webhook Trigger in Build Triggers section and configure like this;
  
+![resim](https://user-images.githubusercontent.com/60771816/120084877-81537300-c0dc-11eb-9080-76a830220f1e.png) ![resim](https://user-images.githubusercontent.com/60771816/120084899-bcee3d00-c0dc-11eb-93a3-a6026040470c.png) ![resim](https://user-images.githubusercontent.com/60771816/120084904-cbd4ef80-c0dc-11eb-9e27-ed8bf97416ed.png)
+6. Copy the script in repository named jenkinsfile and paste it to pipeline section. Don't forget to set environments in the script.
+
