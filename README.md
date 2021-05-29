@@ -40,14 +40,15 @@ End-to-End DevOps is a project that creates the automation processes from commit
 - Commit the change to the Gitlab.
 - Jenkins will be triggered by commit.
 - Jenkins Continuous Integration Pipeline will be started.
-- Source code will be cloned to Jenkins Server.
+- Source code will be cloned to Jenkins server.
 - Source code will be built by Maven.
 - Source code will be tested by SonarQube.
 - Application will be containerized by Docker.
+- New application Docker image version will be pushed to Nexus.
 - Image section in rollout.yaml will be replaced with new image version.
 - New rollout.yaml will be pushed to Gitlab.
 - ArgoCD will acknowledge new rollout.yaml in Gitlab project.
-- ArgoCD will start deployment to Kubernetes Cluster using Blue/Green method.
+- ArgoCD will deploy application to Kubernetes Cluster using Blue/Green method.
 - New application pods will run on Kubernetes while old application pods continue to run via different service.
 - Application will run on WebSphere Liberty in a pod and ready to serve clients.
 #### 1- Creating Infrastructure - Terraform
