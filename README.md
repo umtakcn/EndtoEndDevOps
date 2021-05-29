@@ -72,7 +72,9 @@ git add .
 git commit -m "Initial commit"
 git push -u origin master
 ```
-You should be able to see your application code on Gitlab project that you created.
+You should be able to see your application code on Gitlab project that you created like this;
+
+Also we need to create a webhook to integrate Gitlab with Jenkins. Go to project that you created --> Settings --> Webhooks . Write URL area http://jenkins-external-ip:8080/generic-webhook-trigger/invoke . Write Secret token elveslibraryapp . Tick Push Events and add webhook.
 ### 4- Nexus
 You can access Nexus with http://nexus-external-ip:8081 . After you login Nexus, click on settings symbol --> Repositories --> Create repository --> docker (hosted) . Configure like this;
 
