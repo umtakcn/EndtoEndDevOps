@@ -73,6 +73,7 @@ git commit -m "Initial commit"
 git push -u origin master
 ```
 You should be able to see your application code on Gitlab project that you created like this;
+
 ![resim](https://user-images.githubusercontent.com/60771816/120084540-c75b0780-c0d9-11eb-8442-4cf7b90658de.png)
 
 Also we need to create a webhook to integrate Gitlab with Jenkins. Go to project that you created --> Settings --> Webhooks . Write URL area http://jenkins-external-ip:8080/generic-webhook-trigger/invoke . Write Secret token elveslibraryapp . Tick Push Events and add webhook.
@@ -95,10 +96,12 @@ You can access Jenkins with http://jenkins-external-ip:8080 . After you login Je
      - Nexus Username with password
      - Sonarqube secret text
 3. Go to Manage Jenkins --> Configure System --> Sonarqube servers --> Add SonarQube . Configure like this;
- ![resim](https://user-images.githubusercontent.com/60771816/120084807-f07c9780-c0db-11eb-8971-d6cfb8b9d899.png)
+4. 
+![resim](https://user-images.githubusercontent.com/60771816/120084807-f07c9780-c0db-11eb-8971-d6cfb8b9d899.png)
 
  
 4. Go to Manage Jenkins --> Global Tool Configration --> Sonarqube Scanner --> Add Sonarqube Scanner . Configure like this;
+
 ![resim](https://user-images.githubusercontent.com/60771816/120084793-d17e0580-c0db-11eb-8248-dc6232f11169.png)
 
  
