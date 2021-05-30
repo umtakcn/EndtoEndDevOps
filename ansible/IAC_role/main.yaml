@@ -1,11 +1,11 @@
-- name: Install GitOps System.
+- name: Install DevOps Environment
   hosts: all
   tasks:
-   - name: Import variables.
-     include_vars:
-      dir: vars
-      extensions:
-       - yaml
+    - name: Import variables.
+      include_vars:
+       dir: vars
+       extensions:
+        - yaml
 - import_playbook: tasks/preliminary.yaml
 - import_playbook: tasks/docker.yaml
 - import_playbook: tasks/kubelet.yaml
@@ -13,4 +13,7 @@
 - import_playbook: tasks/cluster.yaml
 - import_playbook: tasks/jenkins.yaml
 - import_playbook: tasks/gitlab.yaml
-- import_playbook: tasks/application.yaml
+- import_playbook: tasks/argocd.yaml
+- import_playbook: tasks/nexus.yaml
+- import_playbook: tasks/sonarqube.yaml
+- import_playbook: tasks/mysql.yaml
