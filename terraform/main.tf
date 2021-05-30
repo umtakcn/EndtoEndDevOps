@@ -189,7 +189,7 @@ resource "google_compute_firewall" "application" {
   network = google_compute_network.noldor.name
   allow {
     protocol = "tcp"
-    ports    = ["32000"]
+    ports    = ["32000", "32100"]
   }
 
   target_tags = ["slave1", "slave2"]
@@ -205,7 +205,8 @@ resource "google_compute_firewall" "jenkins" {
   }
 
   target_tags = ["jenkins"]
-  source_ranges = ["176.40.36.254"]
+  source_ranges = ["your-ip"]
+  source_tags = ["gitlab", "sonarqube"]
 }
 
 resource "google_compute_firewall" "gitlab" {
@@ -217,7 +218,8 @@ resource "google_compute_firewall" "gitlab" {
   }
 
   target_tags = ["gitlab"]
-  source_ranges = ["176.40.36.254"]
+  source_ranges = ["your-ip"]
+  source_tags = ["jenkins", "master", "slave1", "slave2"]
 }
 
 resource "google_compute_firewall" "argocd" {
@@ -225,11 +227,11 @@ resource "google_compute_firewall" "argocd" {
   network = google_compute_network.noldor.name
   allow {
     protocol = "tcp"
-    ports    = ["31472"]
+    ports    = ["32000-33000"]
   }
 
   target_tags = ["slave1", "slave2"]
-  source_ranges = ["176.40.36.254"]
+  source_ranges = ["your-ip"]
 }
 
 resource "google_compute_firewall" "sonarqube" {
@@ -241,7 +243,8 @@ resource "google_compute_firewall" "sonarqube" {
   }
 
   target_tags = ["sonarqube"]
-  source_ranges = ["176.40.36.254"]
+  source_ranges = ["your-ip"]
+  source_tags = ["jenkins"]
 }
 
 resource "google_compute_firewall" "nexus" {
@@ -253,7 +256,8 @@ resource "google_compute_firewall" "nexus" {
   }
 
   target_tags = ["nexus"]
-  source_ranges = ["176.40.36.254"]
+  source_ranges = ["your-ip"]
+  source_tags = ["jenkins", "master", "slave1", "slave2"]
 }
 
 resource "google_compute_firewall" "internal" {
