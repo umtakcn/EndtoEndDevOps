@@ -1,11 +1,12 @@
 - name: Install Jenkins.
   hosts: Jenkins_Server
   tasks:
-    - name: Install OpenJDK 11 and Git.
+    - name: Install OpenJDK 11, git and wget.
       dnf:
-        name: 
+        name:
           - java-11-openjdk-devel
           - git
+          - wget
     - name: Download latest Maven package.
       get_url:
        url: "https://ftp.itu.edu.tr/Mirror/Apache/maven/maven-3/3.8.1/binaries/apache-maven-3.8.1-bin.tar.gz"
@@ -26,9 +27,6 @@
       with_items:
         - chmod +x /etc/profile.d/maven.sh
         - source /etc/profile.d/maven.sh
-    - name: Install wget.
-      dnf:
-        name: wget
     - name: Add Jenkins repo.
       shell: "{{ item }}"
       with_items:
@@ -49,3 +47,7 @@
         path: /var/run/docker.sock
         state: touch
         mode: 0777
+    - name: Place daemon.json
+      template:
+        src: /opt/IAC_role/templates/daemon.json
+        dest: /etc/docker/daemon.json
