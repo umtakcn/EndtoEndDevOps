@@ -2,5 +2,3 @@
 ip_master: 10.128.10.11
 ip_slave1: 10.128.10.12
 ip_slave2: 10.128.10.13
-ip_jenkins: 10.128.10.14
-ip_gitlab: 10.128.10.15
