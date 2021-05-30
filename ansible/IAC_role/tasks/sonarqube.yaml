@@ -1,0 +1,55 @@
+- name: Install Sonarqube
+  hosts: Sonarqube_Server
+  tasks:
+    - name: Install Postgresql repo.
+      shell: dnf install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+    - name: Disable built in postgresql module.
+      shell: dnf -qy module disable postgresql
+    - name: Install Postgresql and OpenJDK 8.
+      dnf:
+        name:
+          - postgresql13-server
+          - java-1.8.0-openjdk
+    - name: Initialize the database.
+      shell: /usr/pgsql-13/bin/postgresql-13-setup initdb
+    - name: Start Postgresql service.
+      service:
+        name: postgresql-13
+        state: started
+        enabled: yes
+    - name: Download latest Nexus package.
+      get_url:
+       url: "https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-8.9.0.43852.zip"
+       dest: /opt/sonarqube-8.9.0.43852.zip
+    - name: Unarchive Nexus package.
+      unarchive:
+       src: /opt/sonarqube-8.9.0.43852.zip
+       dest: /opt
+       remote_src: yes
+    - name: Create sonarqube user.
+      shell: useradd -M sonarqube
+    - file:
+        path: /opt/sonarqube-8.9.0.43852
+        owner: sonarqube
+        group: sonarqube
+        mode: 0776
+    - name: Place sonar.properties
+      template:
+        src: /opt/IAC_role/templates/sonar.sh
+        dest: /opt/sonarqube-8.9.0.43852/bin/linux-x86-64/sonar.sh
+    - name: Place sonar.sh
+      template:
+        src: /opt/IAC_role/templates/sonar.properties
+        dest: /opt/sonarqube-8.9.0.43852/conf/sonar.properties
+    - name: Increate max map count for Elasticsearch.
+      shell: sysctl -w vm.max_map_count=262144
+    - name: Create a new database with name "sonarqube".
+      postgresql_db:
+        name: sonarqube
+    - name: Connect to sonarqube database, create sonarqube user, and grant access to database and products table.
+      postgresql_user:
+        db: sonarqube
+        name: sonarqube
+        password: password
+    - name: Start Sonarqube.
+      shell: /opt/sonarqube-8.9.0.43852/bin/linux-x86-64/sonar.sh start

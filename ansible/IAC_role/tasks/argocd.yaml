@@ -1,0 +1,13 @@
+- name: Install ArgoCD
+  hosts: Master_Server
+  tasks:
+    - name: Setup ArgoCD.
+      shell: "{{ item }}"
+      with_items:
+        - kubectl create namespace argocd
+        - kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+    - name: Setup ArgoCD rollout.
+      shell: "{{ item }}"
+      with_items:
+        - kubectl create namespace argo-rollouts
+        - kubectl apply -n argo-rollouts -f https://raw.githubusercontent.com/argoproj/argo-rollouts/stable/manifests/install.yaml

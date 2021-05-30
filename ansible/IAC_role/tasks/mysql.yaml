@@ -1,0 +1,16 @@
+- name: Install MySQL
+  hosts: Master_Server
+  tasks:
+    - name: Place mysql-deployment.yaml
+      template:
+        src: /opt/IAC_role/templates/mysql-deployment.yaml
+        dest: /opt/mysql-deployment.yaml
+    - name: Place mysql-pv.yaml
+      template:
+        src: /opt/IAC_role/templates/mysql-pv.yaml
+        dest: /opt/mysql-pv.yaml
+    - name: Setup MySQL.
+      shell: "{{ item }}"
+      with_items:
+        - kubectl apply -f /opt/mysql-pv.yaml
+        - kubectl apply -f /opt/mysql-deployment.yaml
