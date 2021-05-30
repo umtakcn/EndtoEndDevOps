@@ -117,7 +117,7 @@ You can access Nexus with http://nexus-external-ip:8081 . After you login Nexus,
 ![resim](https://user-images.githubusercontent.com/60771816/120084552-df328b80-c0d9-11eb-95e4-ecf72c56a29e.png)
 
 #### 5- Test - SonarQube
-You can access Sonarqube with http://sonarqube-external-ip:9000 . After you login Sonarqube, click on A, right top corner --> My Account --> Security --> Generate Tokens . Save this generated token. We will use it for Jenkins. Then, go to Administration --> Configuration --> Webhooks --> Create . Write URL area http://jenkins-external-ip:8080/sonarqube-webhook/ . 
+You can access SonarQube with http://sonarqube-external-ip:9000 . After you login SonarQube, click on A, right top corner --> My Account --> Security --> Generate Tokens . Save this generated token. We will use it for Jenkins. Then, go to Administration --> Configuration --> Webhooks --> Create . Write URL area http://jenkins-external-ip:8080/sonarqube-webhook/ . 
 #### 6- Continuous Integration - Jenkins
 You can access Jenkins with http://jenkins-external-ip:8080 . After you login Jenkins interface, install suggested plugins. We need to configure a couple of things.
 1. Go to Manage Jenkins --> Manage Plugins --> Available . Install these plugins;
@@ -144,7 +144,12 @@ You can access Jenkins with http://jenkins-external-ip:8080 . After you login Je
 
 6. Copy the script in repository named jenkinsfile and paste it to pipeline section. Don't forget to set environments in the script. Our Continuous Integration pipeline is ready to go.
 #### 7- Continuous Deployment - ArgoCD
-You can access with https://slave1-external-ip:nodeport . 
+You can access with https://slave1-external-ip:nodeport . After you login ArgoCD, Go to Settings --> Repositories --> Connect Repo Using Https . Write there your Gitlab repo address and username, password. Click connect. Then Go to Application --> New App . Configure like this;
+
+![resim](https://user-images.githubusercontent.com/60771816/120100832-83a0e600-c14b-11eb-9ddc-e157c3cd77e9.png)
+
+![resim](https://user-images.githubusercontent.com/60771816/120100906-eabe9a80-c14b-11eb-8957-6ca1467ddafd.png)
+
 #### 8- Application - ElvesLibraryApp
 
 ### How does it look like?
