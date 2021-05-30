@@ -90,7 +90,10 @@ terraform plan
 ```shell
 terraform apply
 ```
-Now check on Gcp. Instances, network and firewall rules should be created. 
+Now check on Gcp. Instances, network and firewall rules should be created. It should look like this;
+
+![resim](https://user-images.githubusercontent.com/60771816/120101296-1fcbec80-c14e-11eb-864f-74899b40ebc4.png)
+
 #### 2- Creating Environment - Ansible
 Ssh into ansible-controller instance and upload IAC_role folder to the server. In IAC_role folder, execute this command;
 ```shell
