@@ -146,7 +146,7 @@ You can access Jenkins with http://jenkins-external-ip:8080 . After you login Je
 #### 7- Continuous Deployment - ArgoCD
 You can access with https://slave1-external-ip:nodeport . After you login ArgoCD, Go to Settings --> Repositories --> Connect Repo Using Https . Write there your Gitlab repo address and username, password. Click connect. Then Go to Application --> New App . Configure like this;
 
-![resim](https://user-images.githubusercontent.com/60771816/120100931-0c1f8680-c14c-11eb-8a93-0fcee540c1c4.png)
+![resim](https://user-images.githubusercontent.com/60771816/120100947-248fa100-c14c-11eb-9aca-1b3e84a8f435.png)
 
 ![resim](https://user-images.githubusercontent.com/60771816/120100906-eabe9a80-c14b-11eb-8957-6ca1467ddafd.png)
 
