@@ -55,7 +55,7 @@ End-to-End DevOps is a project that creates the automation processes from commit
 First of all, we need to create infrastructure which includes servers, network and firewall rules. We will use Google Cloud Provider for this. You can get 300 $ free balance for 3 months. All you need is a new Google account. This is more than enough for this project. 
 We will use Terraform to create servers, network and firewall rules. Since we need to create many servers and configure many things, Terraform script will simplify all these things. Let's start.
 First we need to create 2 different images on Gcp. On default, CentOS 8 images don't allow to ssh themselves with using root password. We can use ssh keys, but this will simplify things. Second image is for Ansible. We will install Ansible and take image of that. So after we execute Terraform script. Ansible will be ready to go for configuration management.
-We need to create a CentOS 8 image manually for one time and use these commands;
+We need to create a CentOS 8 image manually for one time. Go to Compute Engine --> Vm Instances --> Create Instances . Select CentOS 8 and ssh into created instance. Use these commands;
 ```shell
 dnf update
 ```
@@ -72,15 +72,15 @@ Change “PermitRootLogin” to “yes” and “PasswordAuthentication” to �
 ```shell
 service sshd restart
 ```
-Take the image and execute these commands for install Ansible.
+Go to Compute Engine --> Images --> Create Image . Select the current instance and save the image. Execute these commands for install Ansible.
 ```shell
 dnf epel-release
 ```
 ```shell
 dnf ansible
 ```
-Take the image and we are ready to go. 
-Now we need to install Terraform. You can download Windows version of Terraform in [here](https://www.terraform.io/downloads.html "here"). We will install Terraform on our local computer and connect to GCP. After you extract Terraform, don't forget to configure environment parameters. We also need a credentials.json file that Terraform use for connecting to Gcp. I advise you to create a new service account for Terraform on Gcp and from it get the necessary keys for json file. Then open main.tf file on the repository with your favored code editor. You need to replace the "your-ip" lines in the main.tf file with your ip. These firewall rules allow only us to access interfaces like Jenkins. Also be careful for image names. You can change the lines with your image names. To execute Terraform script use these;
+Again save the image.
+Now we need to install Terraform. You can download Windows version of Terraform in [here](https://www.terraform.io/downloads.html "here"). We will install Terraform on our local computer and connect to GCP. After you extract Terraform, don't forget to configure environment parameters. We also need a credentials.json file that Terraform use for connecting to Gcp. I advise you to create a new service account for Terraform on Gcp and from it get the necessary keys for json file. Then open main.tf file on the repository with your favored code editor. You need to replace the "your-ip" lines in the main.tf file with your ip. These firewall rules allow only us to access interfaces like Jenkins. Also be careful for image names. You can change the lines 'image = "centos8-noldor"' with your image names. To execute Terraform script use these;
 ```shell
 terraform init
 ```
@@ -92,14 +92,15 @@ terraform apply
 ```
 Now check on Gcp. Instances, network and firewall rules should be created. It should look like this;
 
-![resim](https://user-images.githubusercontent.com/60771816/120101296-1fcbec80-c14e-11eb-864f-74899b40ebc4.png)
+![resim](https://user-images.githubusercontent.com/60771816/120531164-01345280-c3e7-11eb-8ba5-5e818e7897e5.png)
+
 
 #### 2- Creating Environment - Ansible
-Ssh into ansible-controller instance and upload IAC_role folder to the server. In IAC_role folder, execute this command;
+Ssh into ansible-controller instance and upload IAC_role folder to the server. Don't forget to change server passwords in inventory.txt . In IAC_role folder, execute this command;
 ```shell
 ansible-playbook main.yaml -i inventory.txt
 ```
-It will take a while. Ansible will create baremetal 1 Master 2 Slave Kubernetes cluster, Jenkins, Gitlab, Nexus and Sonarqube. All configurations will be done and ready to go. 
+It will take a while. Ansible will create baremetal 1 Master, 2 Slave Kubernetes cluster, Jenkins, Gitlab, Nexus and Sonarqube. All configurations will be done and ready to go. 
 #### 3- Source Control Management - Gitlab
 You can access Gitlab with http://gitlab-external-ip . After that, you should create a project that contains the application source code. To do this in your local computer enter folder which contains application and write these one by one in command window;
 ```shell
