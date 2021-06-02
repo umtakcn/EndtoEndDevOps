@@ -161,8 +161,7 @@ Execute this command to see NodePort value;
 kubectl get services -n argocd
 ```
 
-![resim](https://user-images.githubusercontent.com/60771816/120549101-c7217b80-c3fb-11eb-8ebe-7d385f6e72f7.png)
-
+![resim](https://user-images.githubusercontent.com/60771816/120549263-09e35380-c3fc-11eb-8fe8-727243f36193.png)
 
 You can access with https://slave1-external-ip:nodeport . After you login ArgoCD, Go to Settings --> Repositories --> Connect Repo Using Https . Write there your Gitlab repo address and username, password. Click connect. Then Go to Application --> New App . Configure like this;
 
