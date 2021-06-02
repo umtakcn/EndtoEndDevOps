@@ -227,7 +227,7 @@ resource "google_compute_firewall" "argocd" {
   network = google_compute_network.noldor.name
   allow {
     protocol = "tcp"
-    ports    = ["32000-33000"]
+    ports    = ["30000-32767"]
   }
 
   target_tags = ["slave1", "slave2"]
