@@ -139,7 +139,7 @@ resource "google_compute_instance" "sonarqube" {
 
 resource "google_compute_instance" "nexus" {
   name         = "nexus"
-  machine_type = "e2-small"
+  machine_type = "e2-standard-2"
   depends_on = [time_sleep.wait_15_seconds]
 
   tags = ["nexus"]
