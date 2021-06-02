@@ -163,7 +163,11 @@ kubectl get services -n argocd
 
 ![resim](https://user-images.githubusercontent.com/60771816/120549263-09e35380-c3fc-11eb-8fe8-727243f36193.png)
 
-You can access with https://slave1-external-ip:nodeport . After you login ArgoCD, Go to Settings --> Repositories --> Connect Repo Using Https . Write there your Gitlab repo address and username, password. Click connect. Then Go to Application --> New App . Configure like this;
+You can access with https://slave1-external-ip:nodeport . You can access password by running this command;
+```shell
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+```
+After you login ArgoCD, Go to Settings --> Repositories --> Connect Repo Using Https . Write there your Gitlab repo address and username, password. Click connect. Then Go to Application --> New App . Configure like this;
 
 ![resim](https://user-images.githubusercontent.com/60771816/120100947-248fa100-c14c-11eb-9aca-1b3e84a8f435.png)
 
