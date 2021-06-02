@@ -148,6 +148,22 @@ You can access Jenkins with http://jenkins-external-ip:8080 . After you login Je
 
 6. Copy the script in repository named jenkinsfile and paste it to pipeline section. Don't forget to set environments in the script. Our Continuous Integration pipeline is ready to go.
 #### 7- Continuous Deployment - ArgoCD
+Ssh into master instance. Execute this command for edit the argocd-server service;
+```shell
+kubectl edit svc argocd-server -n argocd
+```
+Replace ClusterIP value with NodePort like this;
+
+![resim](https://user-images.githubusercontent.com/60771816/120548724-5712f580-c3fb-11eb-99cf-76725de2d7b5.png) ![resim](https://user-images.githubusercontent.com/60771816/120548769-65611180-c3fb-11eb-85b3-3b94bfe08045.png)
+
+Execute this command to see NodePort value;
+```shell
+kubectl get services -n argocd
+```
+
+![resim](https://user-images.githubusercontent.com/60771816/120549101-c7217b80-c3fb-11eb-8ebe-7d385f6e72f7.png)
+
+
 You can access with https://slave1-external-ip:nodeport . After you login ArgoCD, Go to Settings --> Repositories --> Connect Repo Using Https . Write there your Gitlab repo address and username, password. Click connect. Then Go to Application --> New App . Configure like this;
 
 ![resim](https://user-images.githubusercontent.com/60771816/120100947-248fa100-c14c-11eb-9aca-1b3e84a8f435.png)
