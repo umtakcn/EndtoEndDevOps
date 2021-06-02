@@ -121,7 +121,7 @@ You can access Nexus with http://nexus-external-ip:8081 . After you login Nexus,
 ![resim](https://user-images.githubusercontent.com/60771816/120084552-df328b80-c0d9-11eb-95e4-ecf72c56a29e.png)
 
 #### 5- Test - SonarQube
-You can access SonarQube with http://sonarqube-external-ip:9000 . After you login SonarQube, click on A, right top corner --> My Account --> Security --> Generate Tokens . Save this generated token. We will use it for Jenkins. Then, go to Administration --> Configuration --> Webhooks --> Create . Write URL area http://jenkins-external-ip:8080/sonarqube-webhook/ . 
+You can access SonarQube with http://sonarqube-external-ip:9000 . Default username is admin, password is admin. After you login SonarQube, click on A, right top corner --> My Account --> Security --> Generate Tokens . Save this generated token. We will use it for Jenkins. Then, go to Administration --> Configuration --> Webhooks --> Create . Write URL area http://jenkins-external-ip:8080/sonarqube-webhook/ . 
 #### 6- Continuous Integration - Jenkins
 You can access Jenkins with http://jenkins-external-ip:8080 . After you login Jenkins interface, install suggested plugins. We need to configure a couple of things.
 1. Go to Manage Jenkins --> Manage Plugins --> Available . Install these plugins;
