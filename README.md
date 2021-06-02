@@ -96,13 +96,13 @@ Now check on Gcp. Instances, network and firewall rules should be created. It sh
 
 
 #### 2- Creating Environment - Ansible
-Ssh into ansible-controller instance and upload IAC_role folder to the server. Don't forget to change server passwords in inventory.txt . In IAC_role folder, execute this command;
+Ssh into ansible-controller instance and type "sudo su" for change user to root. You should do this whenever you connect an instance. Upload IAC_role folder to the server. Don't forget to change server passwords in inventory.txt . In IAC_role folder, execute this command;
 ```shell
 ansible-playbook main.yaml -i inventory.txt
 ```
 It will take a while. Ansible will create baremetal 1 Master, 2 Slave Kubernetes cluster, Jenkins, Gitlab, Nexus and Sonarqube. All configurations will be done and ready to go. 
 #### 3- Source Control Management - Gitlab
-You can access Gitlab with http://gitlab-external-ip . After that, you should create a project that contains the application source code. To do this in your local computer enter folder which contains application and write these one by one in command window;
+You can access Gitlab with http://gitlab-external-ip . After you changed the password, you can sign in with root. Then, you should create a project that contains the application source code. To do this, after you create blank project in Gitlab, enter folder in your local computer which contains application and write these one by one in command window;
 ```shell
 git init
 git remote add origin your-repo-address
@@ -112,9 +112,9 @@ git push -u origin master
 ```
 You should be able to see your application code on Gitlab project that you created like this;
 
-![resim](https://user-images.githubusercontent.com/60771816/120084540-c75b0780-c0d9-11eb-8442-4cf7b90658de.png)
+![resim](https://user-images.githubusercontent.com/60771816/120544663-54fa6800-c3f6-11eb-9d8e-5d4c15966736.png)
 
-Also we need to create a webhook to integrate Gitlab with Jenkins. Go to project that you created --> Settings --> Webhooks . Write URL area http://jenkins-external-ip:8080/generic-webhook-trigger/invoke . Write Secret token elveslibraryapp . Tick Push Events and add webhook.
+Also we need to create a webhook to integrate Gitlab with Jenkins. Go to project that you created --> Settings --> Webhooks . Write URL area http://jenkins-external-ip:8080/generic-webhook-trigger/invoke . Write Secret token elveslibraryapp . Tick Push Events and add webhook. Untick Enable SSL verification.
 #### 4- Repository - Nexus
 You can access Nexus with http://nexus-external-ip:8081 . After you login Nexus, click on settings symbol --> Repositories --> Create repository --> docker (hosted) . Configure like this;
 
