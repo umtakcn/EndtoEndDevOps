@@ -180,4 +180,14 @@ After you login ArgoCD, Go to Settings --> Repositories --> Connect Repo Using H
 
 #### 8- Application - ElvesLibraryApp
 
+kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h mysql -ppassword
+
+CREATE DATABASE matomo_db_name_here;
+
+CREATE USER 'matomo'@'localhost' IDENTIFIED BY 'my-strong-password-here';
+
+GRANT ALL PRIVILEGES ON database_name.* TO 'username'@'localhost';
+
+USE database_name;
+
 ### How does it look like?
