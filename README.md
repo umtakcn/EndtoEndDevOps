@@ -180,14 +180,17 @@ After you login ArgoCD, Go to Settings --> Repositories --> Connect Repo Using H
 
 #### 8- Application - ElvesLibraryApp
 
+kubectl create secret docker-registry nexus --docker-server=35.222.88.107:8083 --docker-username=admin --docker-password=password
 kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h mysql -ppassword
 
-CREATE DATABASE matomo_db_name_here;
+CREATE DATABASE elveslibraryapp;
 
-CREATE USER 'matomo'@'localhost' IDENTIFIED BY 'my-strong-password-here';
+CREATE USER 'elveslibraryapp'@'localhost' IDENTIFIED BY 'password';
 
-GRANT ALL PRIVILEGES ON database_name.* TO 'username'@'localhost';
+GRANT ALL PRIVILEGES ON elveslibraryapp.* TO 'username'@'%';
 
-USE database_name;
+USE elveslibraryapp;
+
+SHOW TABLES;
 
 ### How does it look like?
