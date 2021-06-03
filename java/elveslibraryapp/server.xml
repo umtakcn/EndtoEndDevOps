@@ -15,9 +15,10 @@
         <tcpOptions soReuseAddr="true" inactivityTimeout="60s"/>
 	</httpEndpoint>
 	<httpSession cookieHttpOnly="false" cookieName="JSESSIONID" invalidationTimeout="20m"/>
-	<webContainer deferServletLoad="false"/>
     <!-- Automatically expand WAR files and EAR files -->
-        <applicationManager autoExpand="true"/>
+    <applicationManager autoExpand="true"/>
+    <webContainer deferServletLoad="false"/>
 	
 	<webApplication id="webapp" name="webapp" location="/liberty/wlp/usr/servers/defaultServer/dropins/elveslibraryapp.war" contextRoot="/webapp"/>
 </server>
+
