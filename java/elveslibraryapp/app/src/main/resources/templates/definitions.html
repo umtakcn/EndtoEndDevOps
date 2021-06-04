@@ -5,16 +5,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<h1 th:text="'Known information about ' + ${name}"/>
+<center>
+<h1 th:text="'Known Information About ' + ${name}"/>
 
 <ul th:each="definition : ${definitions}">
-    <li><span th:text="${definition.value}"/></li>
-    <a th:text="Source" th:href="${definition.source}" th:target="_blank"></a>
+    <span th:text="${definition.value}"/>
 </ul>
 
 <div th:if="${definitions==null or definitions.empty}">
     <span th:text="'Unfortunately we do not have any information about ' + ${name}"/>
 </div>
-
+</center>
 </body>
 </html>
