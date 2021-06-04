@@ -1,11 +1,12 @@
 - name: Install Nexus
   hosts: Nexus_Server
   tasks:
-    - name: Install OpenJDK 8 and wget.
+    - name: Install OpenJDK 8, wget and bind-utils.
       dnf:
         name:
           - java-1.8.0-openjdk
           - wget
+          - bind-utils
     - name: Download latest Nexus package.
       get_url:
        url: "https://download.sonatype.com/nexus/3/nexus-3.30.1-01-unix.tar.gz"
@@ -24,24 +25,3 @@
         name: nexus
         state: started
         enabled: yes
-    - name: Register external ip address.
-      shell: dig +short myip.opendns.com @resolver1.opendns.com
-      register: nexus_ip
-    - name: Place daemon.json
-      template:
-        src: /opt/IAC_role/templates/daemon.json
-        dest: /etc/docker/daemon.json
-      when: ansible_host == '{{ ip_master }}'
-    - name: Place daemon.json
-      template:
-        src: /opt/IAC_role/templates/daemon.json
-        dest: /etc/docker/daemon.json
-      when: ansible_host == '{{ ip_slave1 }}'
-    - name: Place daemon.json
-      template:
-        src: /opt/IAC_role/templates/daemon.json
-        dest: /etc/docker/daemon.json
-      when: ansible_host == '{{ ip_slave2 }}'
-    - name: Create secret for Nexus.
-      shell: kubectl create secret docker-registry nexus --docker-server={{ nexus_ip.stdout_lines[0] }}:8083 --docker-username=admin --docker-password=password
-      when: ansible_host == '{{ ip_master }}'
