@@ -1,4 +1,4 @@
 {
-  "insecure-registries" : ["{{ nexus_ip.stdout_lines[0] }}:8083"],
-  "registry-mirrors": ["http://{{ nexus_ip.stdout_lines[0] }}:8083"]
+  "insecure-registries" : ["{{ external_ip_nexus }}:8083"],
+  "registry-mirrors": ["http://{{ external_ip_nexus }}:8083"]
 }
