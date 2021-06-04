@@ -195,7 +195,7 @@ After you enter MySQL, we need to create database and user for our application;
 CREATE DATABASE elveslibraryapp;
 ```
 ```shell
-CREATE USER 'elveslibraryapp'@'%' IDENTIFIED BY 'password';
+CREATE USER 'elveslibrary'@'%' IDENTIFIED BY 'password';
 ```
 ```shell
 GRANT ALL PRIVILEGES ON elveslibraryapp.* TO 'elveslibrary'@'%';
