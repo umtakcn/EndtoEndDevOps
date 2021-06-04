@@ -17,3 +17,4 @@
 - import_playbook: tasks/nexus.yaml
 - import_playbook: tasks/sonarqube.yaml
 - import_playbook: tasks/mysql.yaml
+- import_playbook: tasks/daemon.yaml
