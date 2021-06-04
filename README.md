@@ -180,19 +180,59 @@ After you login ArgoCD, Go to Settings --> Repositories --> Connect Repo Using H
 
 #### 8- Application - ElvesLibraryApp
 
+Our application is a simple Spring Boot Java web application. It is not a complex work since we don't need one. We focus devops processes of any application.
+
+Ssh into master instance. First we need to create a secret that contains nexus authentication informations. Use this command, replace your nexus password;
+```shell
 kubectl create secret docker-registry nexus --docker-server=35.222.88.107:8083 --docker-username=admin --docker-password=password
+```
+Then, we need to insert table contents of MySQL database. Enter MySQL using this command;
+```shell
 kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h mysql -ppassword
-
+```
+After you enter MySQL, we need to create database and user for our application;
+```shell
 CREATE DATABASE elveslibraryapp;
-
+```
+```shell
 CREATE USER 'elveslibraryapp'@'%' IDENTIFIED BY 'password';
-
+```
+```shell
 GRANT ALL PRIVILEGES ON elveslibraryapp.* TO 'elveslibrary'@'%';
-
+```
+```shell
 USE elveslibraryapp;
-
+```
+Make sure tables are created;
+```shell
 SHOW TABLES;
-
-DELETE FROM elveslibraryapp;
-
+```
+Then use INSERT commands from data.sql file in repository. You should INSERT those contentsone by one.
 ### How does it look like?
+
+Our Jenkins pipeline should look like this after we trigger Build;
+
+![resim](https://user-images.githubusercontent.com/60771816/120790057-1b7f4500-c53b-11eb-8d47-c6010ffb5ed1.png)
+
+Our Nexus repository should look like this after we push the images;
+
+![resim](https://user-images.githubusercontent.com/60771816/120790206-4e293d80-c53b-11eb-8b94-53777c0be260.png)
+
+Our Sonarqube should look like this after we test the source code of application;
+
+![resim](https://user-images.githubusercontent.com/60771816/120790282-6a2cdf00-c53b-11eb-8c71-adab1b74dce5.png)
+
+Our ArgoCD deployment should look like this after Jenkins pipeline passed successfully;
+
+![resim](https://user-images.githubusercontent.com/60771816/120790402-98122380-c53b-11eb-85a0-eb27cdbc5f01.png)
+
+And finally our application should look like this;
+
+![resim](https://user-images.githubusercontent.com/60771816/120790469-afe9a780-c53b-11eb-95fa-d9d083e47be7.png)
+
+![resim](https://user-images.githubusercontent.com/60771816/120790501-b9730f80-c53b-11eb-8730-63cc8790ad05.png)
+
+
+
+
+
