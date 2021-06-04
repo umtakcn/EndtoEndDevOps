@@ -1,6 +1,13 @@
 - name: Install Docker.
   hosts: Docker_Servers
   tasks:
+    - name: Place daemon.json
+      template:
+        src: /opt/IAC_role/templates/daemon.json
+        dest: /etc/docker/daemon.json
+    - name: Create secret for Nexus.
+      shell: kubectl create secret docker-registry nexus --docker-server={{ nexus_ip.stdout_lines[0] }}:8083 --docker-username=admin --docker-password=password
+      when: ansible_host == '{{ ip_master }}'
     - name: Install Docker.
       command: "{{ item }}"
       with_items:
