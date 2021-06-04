@@ -1,10 +1,10 @@
-Master ansible_host=10.128.10.11 ansible_ssh_pass=uMtakcn5
-Slave1 ansible_host=10.128.10.12 ansible_ssh_pass=uMtakcn5
-Slave2 ansible_host=10.128.10.13 ansible_ssh_pass=uMtakcn5
-Jenkins ansible_host=10.128.10.14 ansible_ssh_pass=uMtakcn5
-Gitlab ansible_host=10.128.10.15 ansible_ssh_pass=uMtakcn5
-Sonarqube ansible_host=10.128.10.16 ansible_ssh_pass=uMtakcn5
-Nexus ansible_host=10.128.10.17 ansible_ssh_pass=uMtakcn5
+Master ansible_host=10.128.10.11 ansible_ssh_pass=password
+Slave1 ansible_host=10.128.10.12 ansible_ssh_pass=password
+Slave2 ansible_host=10.128.10.13 ansible_ssh_pass=password
+Jenkins ansible_host=10.128.10.14 ansible_ssh_pass=password
+Gitlab ansible_host=10.128.10.15 ansible_ssh_pass=password
+Sonarqube ansible_host=10.128.10.16 ansible_ssh_pass=password
+Nexus ansible_host=10.128.10.17 ansible_ssh_pass=password
 
 [Kubernetes_Servers]
 Master
