@@ -193,4 +193,6 @@ USE elveslibraryapp;
 
 SHOW TABLES;
 
+DELETE FROM employees;
+
 ### How does it look like?
