@@ -168,7 +168,11 @@ kubectl get services -n argocd
 
 ![resim](https://user-images.githubusercontent.com/60771816/120549263-09e35380-c3fc-11eb-8fe8-727243f36193.png)
 
-You can access with https://slave1-external-ip:nodeport . You can access password by running this command;
+Also, we need to create a secret that contains nexus authentication informations. Use this command, replace your nexus password;
+```shell
+kubectl create secret docker-registry nexus --docker-server=35.222.88.107:8083 --docker-username=admin --docker-password=password
+```
+You can access with https://slave1-external-ip:nodeport . Get password by running this command;
 ```shell
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ```
@@ -180,13 +184,9 @@ After you login ArgoCD, Go to Settings --> Repositories --> Connect Repo Using H
 
 #### 8- Application - ElvesLibraryApp
 
-Our application is a simple Spring Boot Java web application. It is not a complex work since we don't need one. We focus devops processes of any application.
+Our application is a simple Spring Boot Java web application. It is not a complex work since we don't need one. We focus devops processes of any application only. We have a main page and three definition which user can select. After it selected, application gets the related information of selected object from MySQL database.
 
-Ssh into master instance. First we need to create a secret that contains nexus authentication informations. Use this command, replace your nexus password;
-```shell
-kubectl create secret docker-registry nexus --docker-server=35.222.88.107:8083 --docker-username=admin --docker-password=password
-```
-Then, we need to insert table contents of MySQL database. Enter MySQL using this command;
+Ssh into master instance. We need to insert table contents of MySQL database. Enter MySQL using this command;
 ```shell
 kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h mysql -ppassword
 ```
@@ -231,8 +231,3 @@ And finally our application should look like this;
 ![resim](https://user-images.githubusercontent.com/60771816/120790469-afe9a780-c53b-11eb-95fa-d9d083e47be7.png)
 
 ![resim](https://user-images.githubusercontent.com/60771816/120790501-b9730f80-c53b-11eb-8730-63cc8790ad05.png)
-
-
-
-
-
