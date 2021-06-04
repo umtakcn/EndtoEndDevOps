@@ -5,11 +5,13 @@
       shell: dnf install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm
     - name: Disable built in postgresql module.
       shell: dnf -qy module disable postgresql
-    - name: Install Postgresql and OpenJDK 8.
+    - name: Install necessary packages.
       dnf:
         name:
           - postgresql13-server
-          - java-1.8.0-openjdk
+          - java-11-openjdk-devel
+          - unzip
+          - python3-psycopg2
     - name: Initialize the database.
       shell: /usr/pgsql-13/bin/postgresql-13-setup initdb
     - name: Start Postgresql service.
@@ -17,11 +19,11 @@
         name: postgresql-13
         state: started
         enabled: yes
-    - name: Download latest Nexus package.
+    - name: Download latest Sonarqube package.
       get_url:
        url: "https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-8.9.0.43852.zip"
        dest: /opt/sonarqube-8.9.0.43852.zip
-    - name: Unarchive Nexus package.
+    - name: Unarchive Sonarqube package.
       unarchive:
        src: /opt/sonarqube-8.9.0.43852.zip
        dest: /opt
@@ -33,6 +35,11 @@
         owner: sonarqube
         group: sonarqube
         mode: 0776
+        recurse: yes
+    - file:
+        path: /var
+        owner: sonarqube
+        group: sonarqube
     - name: Place sonar.properties
       template:
         src: /opt/IAC_role/templates/sonar.sh
@@ -44,9 +51,13 @@
     - name: Increate max map count for Elasticsearch.
       shell: sysctl -w vm.max_map_count=262144
     - name: Create a new database with name "sonarqube".
+      become: true
+      become_user: postgres
       postgresql_db:
         name: sonarqube
     - name: Connect to sonarqube database, create sonarqube user, and grant access to database and products table.
+      become: true
+      become_user: postgres
       postgresql_user:
         db: sonarqube
         name: sonarqube
