@@ -47,7 +47,3 @@
         path: /var/run/docker.sock
         state: touch
         mode: 0777
-    - name: Place daemon.json
-      template:
-        src: /opt/IAC_role/templates/daemon.json
-        dest: /etc/docker/daemon.json
