@@ -207,7 +207,7 @@ Make sure tables are created;
 ```shell
 SHOW TABLES;
 ```
-Then use INSERT commands from data.sql file in repository. You should INSERT those contentsone by one.
+Then use INSERT commands from data.sql file in repository. You should INSERT those contents one by one.
 ### How does it look like?
 
 Our Jenkins pipeline should look like this after we trigger Build;
@@ -218,7 +218,7 @@ Our Nexus repository should look like this after we push the images;
 
 ![resim](https://user-images.githubusercontent.com/60771816/120790206-4e293d80-c53b-11eb-8b94-53777c0be260.png)
 
-Our Sonarqube should look like this after we test the source code of application;
+Our SonarQube should look like this after we test the source code of application;
 
 ![resim](https://user-images.githubusercontent.com/60771816/120790282-6a2cdf00-c53b-11eb-8c71-adab1b74dce5.png)
 
