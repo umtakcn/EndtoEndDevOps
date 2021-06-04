@@ -185,14 +185,14 @@ kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h 
 
 CREATE DATABASE elveslibraryapp;
 
-CREATE USER 'elveslibraryapp'@'localhost' IDENTIFIED BY 'password';
+CREATE USER 'elveslibraryapp'@'%' IDENTIFIED BY 'password';
 
-GRANT ALL PRIVILEGES ON elveslibraryapp.* TO 'username'@'%';
+GRANT ALL PRIVILEGES ON elveslibraryapp.* TO 'elveslibrary'@'%';
 
 USE elveslibraryapp;
 
 SHOW TABLES;
 
-DELETE FROM employees;
+DELETE FROM elveslibraryapp;
 
 ### How does it look like?
