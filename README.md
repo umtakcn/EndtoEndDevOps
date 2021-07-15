@@ -1,5 +1,7 @@
 ## End to End DevOps
 
+![resim](https://user-images.githubusercontent.com/60771816/125847344-8446280a-ef18-4301-b66d-036388863a57.png)
+
 ### Table of Contents
 ==============
 
